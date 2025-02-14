@@ -1,0 +1,456 @@
+openapi: 3.0.2
+info:
+  title: MIC Accounts service
+  description: Mic openning accounts banking
+  contact:
+    name: Roberto Benitez
+    email: rbenitez_20_95@hotmail.com
+  version: 1.0.0
+servers:
+  - url: http://localhost:8082
+    description: Desarrollo
+paths:
+  /accounts:
+    post:
+      tags:
+        - created
+      summary: Apertu cuenta bancarias
+      description: |
+        ## 👋 Propósito
+        
+        Esta Mic de Negocio permite obtener la Cuenta bancaria por id.
+
+      operationId: created
+      parameters:
+        - $ref: "#/components/parameters/x-user-id"
+        - $ref: "#/components/parameters/x-consumer-id"
+        - $ref: "#/components/parameters/x-transaction-id"
+        - $ref: "#/components/parameters/x-caller-id"
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requestBodyAperturarCuentaAhorro'
+        required: true
+      responses:
+        '200':
+          $ref: "#/components/responses/Ok"
+        '202':
+          $ref: "#/components/responses/Accepted"
+        '400':
+          $ref: "#/components/responses/BadRequest"
+        '401':
+          $ref: "#/components/responses/Unauthorized"
+        '404':
+          $ref: "#/components/responses/NotFound"
+        '405':
+          $ref: "#/components/responses/NotAllowed"
+        '500':
+          $ref: "#/components/responses/InternalServerErrorStatus"
+        '504':
+          $ref: "#/components/responses/GatewayTimeoutErrorStatus"
+  /accounts/{id}:
+    get:
+      tags:
+        - obtener
+      summary: obtener cuenta en bas a su id
+      description: |
+        ## 👋 Propósito
+        
+        Esta Mic de Negocio permite aperturar Cuentas bancarias.
+
+      operationId: obtener
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/x-user-id"
+        - $ref: "#/components/parameters/x-consumer-id"
+        - $ref: "#/components/parameters/x-transaction-id"
+        - $ref: "#/components/parameters/x-caller-id"
+
+      responses:
+        "200":
+          $ref: '#/components/responses/Ok'
+        "202":
+          $ref: '#/components/responses/Accepted'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "405":
+          $ref: '#/components/responses/NotAllowed'
+        "500":
+          $ref: '#/components/responses/InternalServerErrorStatus'
+        "504":
+          $ref: '#/components/responses/GatewayTimeoutErrorStatus'
+    put:
+      tags:
+        - update
+      summary: actualizar cuenta en base a su id
+      description: |
+        ## 👋 Propósito
+        
+        Esta Mic de Negocio permite aperturar Cuentas bancarias
+
+      operationId: update
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/x-user-id"
+        - $ref: "#/components/parameters/x-consumer-id"
+        - $ref: "#/components/parameters/x-transaction-id"
+        - $ref: "#/components/parameters/x-caller-id"
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requestUpdateCuentaAhorro'
+        required: true
+      responses:
+        "200":
+          $ref: '#/components/responses/Ok'
+        "202":
+          $ref: '#/components/responses/Accepted'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "405":
+          $ref: '#/components/responses/NotAllowed'
+        "500":
+          $ref: '#/components/responses/InternalServerErrorStatus'
+        "504":
+          $ref: '#/components/responses/GatewayTimeoutErrorStatus'
+    delete:
+      tags:
+        - delete
+      summary: eliminar cuenta en base a su id
+      description: |
+        ## 👋 Propósito
+        
+        Esta Mic de Negocio permite aperturar Cuentas bancarias.
+
+      operationId: delete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/x-user-id"
+        - $ref: "#/components/parameters/x-consumer-id"
+        - $ref: "#/components/parameters/x-transaction-id"
+        - $ref: "#/components/parameters/x-caller-id"
+
+      responses:
+        "200":
+          $ref: '#/components/responses/OkDelete'
+        "202":
+          $ref: '#/components/responses/Accepted'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "405":
+          $ref: '#/components/responses/NotAllowed'
+        "500":
+          $ref: '#/components/responses/InternalServerErrorStatus'
+        "504":
+          $ref: '#/components/responses/GatewayTimeoutErrorStatus'
+components:
+  schemas:
+    requestBodyAperturarCuentaAhorro:
+      description: Datos para aperturar Cuenta De Ahorro
+      type: object
+      properties:
+        typeAccount:
+          type: string
+          maxLength: 12
+        idClient:
+          type: string
+          maxLength: 25
+        openingBalance:
+          type: number
+          format: double
+      required:
+        - typeAccount
+        - idClient
+        - openingBalance
+      example:
+        typeAccount: "AHORRO"
+        idClient: "6768gwef9g3f3hf3hi"
+        openingBalance: 1500.0
+    requestUpdateCuentaAhorro:
+      description: Datos para actualizar saldo de Cuenta.
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+      required:
+        - balance
+      example:
+        balance: 1500.0
+    StatusResponseOK:
+      type: object
+      properties:
+        id:
+          type: string
+        typeAccount:
+          type: string
+        idClient:
+          type: string
+        balance:
+          type: number
+          format: double
+        accountNumber:
+          type: string
+          maxLength: 20
+        cci:
+          type: string
+          maxLength: 20
+        dateCreated:
+          type: string
+        dateUpdate:
+          type: string
+    StatusResponseOKDelete:
+      type: object
+      properties:
+        message:
+          type: string
+    StatusResponseData:
+      type: object
+      properties:
+        id:
+          type: string
+        typeAccount:
+          type: string
+        idClient:
+          type: string
+        balance:
+          type: number
+          format: double
+        dateCreated:
+          type: integer
+        accountNumber:
+          type: string
+          maxLength: 20
+        cci:
+          type: string
+          maxLength: 20
+    StatusResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        instanse:
+          type: string
+      description: Modelo de respuesta de error.
+    StatusResponse_error:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        errorCode:
+          type: string
+        errorDetails:
+          type: array
+          items:
+            type: object
+  parameters:
+    x-consumer-id:
+      name: x-consumer-id
+      in: header
+      description: 'Datos del aplicativo o canal de origen. Formato: {canal}.'
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+      example: landingpasivos
+    x-transaction-id:
+      name: x-transaction-id
+      in: header
+      description: 'Identificador con estructura definida generado en el canal que identifica a un paso de un flujo funcional y que se propaga en todos los componentes.'
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+      example: ladingpasivos.aperturacuentadigital.Fri Oct 20 10-20-35 GMT-05-00 2023.30f14c6c1fc85cba12bfd093aa93aa
+    x-caller-id:
+      name: x-caller-id
+      in: header
+      description: 'Url del servicio que originó la petición'
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+      example: https://bs-aperturarcuenta-prod.apps.ocpnoprod.domibco.com.pe/loans_deposits/savingsAccount/v1/ahorros/aperturar
+    x-user-id:
+      name: x-user-id
+      in: header
+      description:
+        'Identificador del usuario.'
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+      example: "9876599"
+    id:
+      name: id
+      in: path
+      description: User ID
+      style: simple
+      required: true
+      schema:
+        type: string
+      example: "7287ge99h29ege28239e"
+  responses:
+    Ok:
+      description: Respuesta exitosa.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusResponseOK'
+          examples:
+            OK:
+              $ref: '#/components/examples/OK'
+    OkDelete:
+      description: Respuesta exitosa.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusResponseOKDelete'
+          examples:
+            OK:
+              $ref: '#/components/examples/OKDelete'
+    Accepted:
+      description: Respuesta con error de validación y/o reglas de negocio.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusResponse'
+          examples:
+            Accepted:
+              $ref: '#/components/examples/Accepted'
+    BadRequest:
+      description: 'Respuesta que indica que no se ha enviado un campo obligatorio en el body o header o no se ha cumplido con la estructura del contrato.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusResponse'
+          examples:
+            BadRequest:
+              $ref: '#/components/examples/BadRequest'
+    NotFound:
+      description: Respuesta que indica que no se encontró el recurso solicitado.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusResponse'
+          examples:
+            NotFound:
+              $ref: '#/components/examples/NotFound'
+    Unauthorized:
+      description: Respuesta que indica Auth Token not found or not authorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusResponse'
+          examples:
+            NotFound:
+              $ref: '#/components/examples/Unauthorized'
+    NotAllowed:
+      description: Respuesta que indica metodo no permitido
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusResponse'
+          examples:
+            NotAllowed:
+              $ref: '#/components/examples/NotAllowed'
+    InternalServerErrorStatus:
+      description: Respuesta con error interno del servidor.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusResponse'
+          examples:
+            InternalServerError:
+              $ref: '#/components/examples/InternalServerErrorStatus'
+    GatewayTimeoutErrorStatus:
+      description: Respuesta con error de timeout del servidor.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StatusResponse'
+          examples:
+            GatewayTimeout:
+              $ref: '#/components/examples/GatewayTimeoutErrorStatus'
+  examples:
+    OK:
+      value:
+        id: "AHORRO"
+        typeAccount : "AHORRO"
+        idClient : "AHORRO"
+        balance: 1500.0
+        dateCreated : "09/02/2025"
+        accountNumber: "15184151984165184"
+        cci: "000001518415198416518400000"
+        dateUpdate: "09/02/2025"
+    OKDelete:
+      value:
+        message: "Cuenta bancaria eliminada exitosamente"
+    Accepted:
+      value:
+        statusCode: 202
+        type: '{http://loansdeposits-dev.apps.ocpnoprod.domibco.com.pe/mic-bs-loans-deposits-savings-account-aperturarcuenta/v1/ahorros/aperturar}'
+        title: Número de producto no válido.
+        detail: mensaje:Aperturar cuenta
+    BadRequest:
+      value:
+        statusCode: 400
+        type : "data:OperationNotFound"
+        title : "Resource Not Found"
+        detail : "Unable to match incoming request to an operation."
+    Unauthorized:
+      value:
+        statusCode: 401
+        type: "data:SubscriptionKeyNotFound"
+        title: "Access Denied"
+        detail: "Access denied due to missing subscription key. Make sure to include subscription key when making requests to an API."
+    NotFound:
+      value:
+        statusCode: 404
+        type : "data:OperationNotFound"
+        title : "Resource not found"
+        detail : "Unable to match incoming request to an operation."
+    InternalServerErrorStatus:
+      value:
+        statusCode: 500
+        type : "data:BackendConnectionFailure"
+        title : "Internal Server Error"
+        detail : "Name does not resolve"
+    GatewayTimeoutErrorStatus:
+      value:
+        statusCode: 504
+        type : "data:BackendConnectionFailure"
+        title : "Time out de conexion"
+        detail : "Time out de conexion"
+    NotAllowed:
+      value:
+        statusCode: 405
+        type : "data:BackendConnectionFailure"
+        title : "Metodo no permitido"
+        detail : "Metodo no permitido"
