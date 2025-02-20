@@ -13,11 +13,12 @@ import service.accounts.model.RequestUpdateCuentaAhorro;
 import service.accounts.model.StatusResponseOK;
 import service.accounts.model.StatusResponseOKDelete;
 import service.accounts.repository.AccountRepository;
+import service.accounts.service.AccountsService;
 import service.accounts.util.Utility;
 
 @Service
 @RequiredArgsConstructor
-public class AccountServiceImpl implements AccountsApiDelegate {
+public class AccountServiceImpl implements AccountsService {
 
     private final AccountRepository accountRepository;
 
