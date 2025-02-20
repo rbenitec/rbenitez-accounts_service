@@ -1,12 +1,22 @@
 package service.accounts.controller;
 
 
-//@RestController
-//@RequestMapping("/api")
-//@RequiredArgsConstructor
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
+import service.accounts.model.AccountDto;
+import service.accounts.service.AccountsService;
+
+@RestController
+@RequestMapping("/api")
+@RequiredArgsConstructor
 public class AccountController {
 
-    /*
+
     private final AccountsService iclientService;
 
 
@@ -41,12 +51,10 @@ public class AccountController {
         return iclientService.delete(id);
     }
 
-
-    /*
     @PostMapping("/deleteClient")
     Flux<AccountDto> deleteClient(@PathVariable("id") String id){
         return iclientService.delete(id);
     }
 
-     */
+
 }

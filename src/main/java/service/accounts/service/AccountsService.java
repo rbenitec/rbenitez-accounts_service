@@ -2,7 +2,6 @@ package service.accounts.service;
 
 
 public interface AccountsService {
-	/*
 	Flux<AccountDto> findAll();
 	Mono<AccountDto> save(AccountDto client);
 
@@ -12,5 +11,4 @@ public interface AccountsService {
 
 	Mono<Void> delete(String id);
 
-	 */
 }
