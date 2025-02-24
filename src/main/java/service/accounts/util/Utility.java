@@ -15,6 +15,15 @@ public class Utility {
     }
 
     /**
+     * Genera un id de cuenta bancaria de 12 dígitos.
+     *
+     * @return Id de cuenta como String.
+     */
+    public static String generatedIdCredit() {
+        return "PA" + java.util.UUID.randomUUID();
+    }
+
+    /**
      * Genera un número de cuenta bancaria de 12 dígitos.
      *
      * @return Número de cuenta como String.

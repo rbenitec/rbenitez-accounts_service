@@ -11,6 +11,7 @@ import service.accounts.model.ResponseAccountDto;
 import service.accounts.model.ResponseDeleteDto;
 import service.accounts.repository.AccountRepository;
 import service.accounts.service.AccountsService;
+import service.accounts.util.Utility;
 
 @Service
 @RequiredArgsConstructor
@@ -47,6 +48,7 @@ public class AccountServiceImpl implements AccountsService {
                         .map(mapperToAccount)
                         .flatMap(customerUpdate -> {
                             customerUpdate.setId(accountId);
+                            customerUpdate.setDateUpdate(Utility.getDateTimeNow());
                             return accountRepository.save(customerUpdate);
                         })
                         .map(mapperToResponseAccount))

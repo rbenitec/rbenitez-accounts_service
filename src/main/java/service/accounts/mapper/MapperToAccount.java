@@ -12,6 +12,7 @@ public class MapperToAccount implements Function<RequestAccountDto, Account> {
     @Override
     public Account apply(RequestAccountDto requestCustomerDto) {
         Account account = Account.builder()
+                .id(Utility.generatedIdCredit())
                 .accountNumber(Utility.generatedAccountNumber())
                 .typeAccount(requestCustomerDto.getAccountType())
                 .openingAmount(requestCustomerDto.getOpeningAmount())
