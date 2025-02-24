@@ -19,8 +19,8 @@ public class Utility {
      *
      * @return Número de cuenta como String.
      */
-    public static String generarNumeroCuenta() {
-        return generarNumeroAleatorio(LONGITUD_CUENTA);
+    public static String generatedAccountNumber() {
+        return generatedNumberRandom(LONGITUD_CUENTA);
     }
 
     /**
@@ -29,7 +29,7 @@ public class Utility {
      * @param numeroCuenta Número de cuenta de 12 dígitos.
      * @return CCI de 18 dígitos como String.
      */
-    public static String generarCCI(String numeroCuenta) {
+    public static String generatedCCI(String numeroCuenta) {
         if (numeroCuenta == null || numeroCuenta.length() != LONGITUD_CUENTA || !numeroCuenta.matches("\\d+")) {
             throw new IllegalArgumentException("El número de cuenta debe tener exactamente 12 dígitos numéricos.");
         }
@@ -42,7 +42,7 @@ public class Utility {
      * @param longitud Cantidad de dígitos del número a generar.
      * @return Número aleatorio como String.
      */
-    private static String generarNumeroAleatorio(int longitud) {
+    private static String generatedNumberRandom(int longitud) {
         Random random = new Random();
         StringBuilder numero = new StringBuilder();
         for (int i = 0; i < longitud; i++) {
@@ -53,11 +53,12 @@ public class Utility {
 
     /**
      * Método para obtener la fecha y hora actual en formato "dd-MM-yyyy HH:mm:ss".
+     *
      * @return Fecha y hora como String.
      */
-    public static String obtenerFechaHoraActual() {
-        LocalDateTime ahora = LocalDateTime.now();
+    public static String getDateTimeNow() {
+        LocalDateTime hour = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        return ahora.format(formatter);
+        return hour.format(formatter);
     }
 }
