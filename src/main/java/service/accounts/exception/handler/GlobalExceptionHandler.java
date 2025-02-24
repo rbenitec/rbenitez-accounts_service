@@ -5,9 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import reactor.core.publisher.Mono;
-import service.customer.exception.ApiRestExternalException;
-import service.customer.exception.BusinessException;
-import service.customer.model.dto.ErrorDto;
+import service.accounts.exception.ApiRestExternalException;
+import service.accounts.exception.BusinessException;
+import service.accounts.model.ErrorDto;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
