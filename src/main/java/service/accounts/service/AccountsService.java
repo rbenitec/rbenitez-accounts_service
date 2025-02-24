@@ -1,14 +1,18 @@
 package service.accounts.service;
 
 
+import reactor.core.publisher.Mono;
+import service.accounts.model.RequestAccountDto;
+import service.accounts.model.ResponseAccountDto;
+import service.accounts.model.ResponseDeleteDto;
+
 public interface AccountsService {
-	Flux<AccountDto> findAll();
-	Mono<AccountDto> save(AccountDto client);
+	Mono<ResponseAccountDto> saveAccount(Mono<RequestAccountDto> customerDto);
 
-	Flux<AccountDto> findClientByAge(int age);
+	Mono<ResponseAccountDto> findAccountById(String accountId);
 
-	Mono<AccountDto> update(AccountDto client);
+	Mono<ResponseAccountDto> updateAccount(String accountId, Mono<RequestAccountDto> customerDto);
 
-	Mono<Void> delete(String id);
+	Mono<ResponseDeleteDto> deleteAccount(String accountId);
 
 }
