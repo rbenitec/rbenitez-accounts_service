@@ -15,6 +15,8 @@ public class ResponseAccountDto {
     private String accountId;
     private String accountType;
     private String customerId;
+    private String accountNumber;
+    private String cci;
     private Double amount;
     private String createAt;
     private String updateAt;

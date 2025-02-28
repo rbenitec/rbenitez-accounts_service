@@ -14,11 +14,12 @@ public class MapperToAccount implements Function<RequestAccountDto, Account> {
         Account account = Account.builder()
                 .accountNumber(Utility.generatedAccountNumber())
                 .typeAccount(requestCustomerDto.getAccountType())
+                .customerId(requestCustomerDto.getCustomerId())
                 .openingAmount(requestCustomerDto.getOpeningAmount())
-                .dateUpdate(Utility.getDateTimeNow())
+                .dateCreated(Utility.getDateTimeNow())
                 .dateUpdate(Utility.getDateTimeNow())
                 .build();
-        account.setId(Utility.generatedCCI(account.getAccountNumber()));
+        account.setCci(Utility.generatedCCI(account.getAccountNumber()));
         return account;
     }
 }

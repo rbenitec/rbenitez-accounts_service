@@ -19,7 +19,7 @@ import service.accounts.model.ResponseDeleteDto;
 import service.accounts.service.AccountsService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/accounts")
 @RequiredArgsConstructor
 public class AccountController {
 
@@ -32,7 +32,7 @@ public class AccountController {
      * @return ResponseCustomerDto
      */
     @PostMapping()
-    Mono<ResponseEntity<ResponseAccountDto>> createdCustomer(@RequestBody Mono<RequestAccountDto> accountDto) {
+    Mono<ResponseEntity<ResponseAccountDto>> createdAccount(@RequestBody Mono<RequestAccountDto> accountDto) {
         return accountsService.saveAccount(accountDto)
                 .map(ResponseEntity.status(HttpStatus.CREATED)::body);
     }
@@ -40,38 +40,38 @@ public class AccountController {
     /**
      * Operation for Account by id.
      *
-     * @param customerId
+     * @param accountId
      * @return
      */
     @GetMapping("/{accountId}")
-    public Mono<ResponseEntity<ResponseAccountDto>> getCustomerById(@PathVariable("customerId") String customerId) {
-        return accountsService.findAccountById(customerId)
+    public Mono<ResponseEntity<ResponseAccountDto>> getAccountById(@PathVariable("accountId") String accountId) {
+        return accountsService.findAccountById(accountId)
                 .map(ResponseEntity.status(HttpStatus.OK)::body);
     }
 
     /**
      * Operation by update Account.
      *
-     * @param customerId
+     * @param accountId
      * @param accountDto
      * @return
      */
     @PutMapping("/{accountId}")
-    Mono<ResponseEntity<ResponseAccountDto>> updateCustomer(@PathVariable("customerId") String customerId,
+    Mono<ResponseEntity<ResponseAccountDto>> updateAccount(@PathVariable("accountId") String accountId,
                                                             @RequestBody Mono<RequestAccountDto> accountDto) {
-        return accountsService.updateAccount(customerId, accountDto)
+        return accountsService.updateAccount(accountId, accountDto)
                 .map(ResponseEntity.status(HttpStatus.OK)::body);
     }
 
     /**
      * Operation by delete Account.
      *
-     * @param customerId
+     * @param accountId
      * @return
      */
     @DeleteMapping("/{accountId}")
-    Mono<ResponseEntity<ResponseDeleteDto>> deleteCustomer(@PathVariable("customerId") String customerId) {
-        return accountsService.deleteAccount(customerId)
+    Mono<ResponseEntity<ResponseDeleteDto>> deleteAccount(@PathVariable("accountId") String accountId) {
+        return accountsService.deleteAccount(accountId)
                 .map(ResponseEntity.status(HttpStatus.OK)::body);
     }
 
