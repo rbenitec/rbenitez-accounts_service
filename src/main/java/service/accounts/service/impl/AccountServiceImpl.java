@@ -6,7 +6,9 @@ import reactor.core.publisher.Mono;
 import service.accounts.exception.BusinessException;
 import service.accounts.mapper.MapperToAccount;
 import service.accounts.mapper.MapperToResponseAccount;
+import service.accounts.mapper.MapperUpdateToAccount;
 import service.accounts.model.RequestAccountDto;
+import service.accounts.model.RequestUpdateAccountDto;
 import service.accounts.model.ResponseAccountDto;
 import service.accounts.model.ResponseDeleteDto;
 import service.accounts.repository.AccountRepository;
@@ -17,8 +19,8 @@ import service.accounts.service.AccountsService;
 public class AccountServiceImpl implements AccountsService {
 
     private final AccountRepository accountRepository;
-
     private final MapperToAccount mapperToAccount;
+    private final MapperUpdateToAccount mapperUpdateToAccount;
     private final MapperToResponseAccount mapperToResponseAccount;
 
 
@@ -40,15 +42,12 @@ public class AccountServiceImpl implements AccountsService {
     }
 
     @Override
-    public Mono<ResponseAccountDto> updateAccount(String accountId, Mono<RequestAccountDto> requestAccountDto) {
+    public Mono<ResponseAccountDto> updateAccount(String accountId, Mono<RequestUpdateAccountDto> requestAccountDto) {
         return accountRepository.findById(accountId)
                 .switchIfEmpty(Mono.error(new BusinessException("updateAccount", "Account with id" + accountId + "does not exist")))
-                .flatMap(customer -> requestAccountDto
-                        .map(mapperToAccount)
-                        .flatMap(customerUpdate -> {
-                            customerUpdate.setId(accountId);
-                            return accountRepository.save(customerUpdate);
-                        })
+                .flatMap(existingAccount -> requestAccountDto
+                        .doOnSuccess(requestUpdateAccountDto -> mapperUpdateToAccount.accept(requestUpdateAccountDto, existingAccount))
+                        .then(accountRepository.save(existingAccount))
                         .map(mapperToResponseAccount))
                 .onErrorMap(ex -> new BusinessException("[updateAccount]: Error in the process of update a account", ex.getMessage()));
     }

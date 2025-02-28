@@ -19,7 +19,7 @@ public class Account {
     private String id;
     private String typeAccount;
     private String customerId;
-    private Double openingAmount;
+    private Double amount;
     private String accountNumber;
     private String cci;
     private String dateCreated;

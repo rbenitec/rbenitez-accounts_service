@@ -17,7 +17,7 @@ public class MapperToResponseAccount implements Function<Account, ResponseAccoun
                 account.getCustomerId(),
                 account.getAccountNumber(),
                 account.getCci(),
-                account.getOpeningAmount(),
+                account.getAmount(),
                 account.getDateCreated(),
                 account.getDateUpdate()
         );

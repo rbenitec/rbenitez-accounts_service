@@ -11,8 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RequestAccountDto {
-    private String accountType;
-    private String customerId;
+public class RequestUpdateAccountDto {
     private Double amount;
 }
