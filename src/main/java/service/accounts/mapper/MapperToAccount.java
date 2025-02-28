@@ -15,7 +15,7 @@ public class MapperToAccount implements Function<RequestAccountDto, Account> {
                 .accountNumber(Utility.generatedAccountNumber())
                 .typeAccount(requestCustomerDto.getAccountType())
                 .customerId(requestCustomerDto.getCustomerId())
-                .openingAmount(requestCustomerDto.getOpeningAmount())
+                .amount(requestCustomerDto.getAmount())
                 .dateCreated(Utility.getDateTimeNow())
                 .dateUpdate(Utility.getDateTimeNow())
                 .build();

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import service.accounts.model.RequestAccountDto;
+import service.accounts.model.RequestUpdateAccountDto;
 import service.accounts.model.ResponseAccountDto;
 import service.accounts.model.ResponseDeleteDto;
 import service.accounts.service.AccountsService;
@@ -58,7 +59,7 @@ public class AccountController {
      */
     @PutMapping("/{accountId}")
     Mono<ResponseEntity<ResponseAccountDto>> updateAccount(@PathVariable("accountId") String accountId,
-                                                            @RequestBody Mono<RequestAccountDto> accountDto) {
+                                                            @RequestBody Mono<RequestUpdateAccountDto> accountDto) {
         return accountsService.updateAccount(accountId, accountDto)
                 .map(ResponseEntity.status(HttpStatus.OK)::body);
     }
