@@ -2,6 +2,7 @@ package service.accounts.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +20,9 @@ import service.accounts.model.ResponseAccountDto;
 import service.accounts.model.ResponseDeleteDto;
 import service.accounts.service.AccountsService;
 
+import javax.validation.Valid;
+
+@Slf4j
 @RestController
 @RequestMapping("/accounts")
 @RequiredArgsConstructor
@@ -33,8 +37,9 @@ public class AccountController {
      * @return ResponseCustomerDto
      */
     @PostMapping()
-    Mono<ResponseEntity<ResponseAccountDto>> createdAccount(@RequestBody Mono<RequestAccountDto> accountDto) {
-        return accountsService.saveAccount(accountDto)
+    Mono<ResponseEntity<ResponseAccountDto>> createdAccount(@RequestBody @Valid Mono<RequestAccountDto> accountDto) {
+        log.info("Created Account!");
+        return accountsService.createdAccount(accountDto)
                 .map(ResponseEntity.status(HttpStatus.CREATED)::body);
     }
 
@@ -59,7 +64,7 @@ public class AccountController {
      */
     @PutMapping("/{accountId}")
     Mono<ResponseEntity<ResponseAccountDto>> updateAccount(@PathVariable("accountId") String accountId,
-                                                            @RequestBody Mono<RequestUpdateAccountDto> accountDto) {
+                                                           @RequestBody Mono<RequestUpdateAccountDto> accountDto) {
         return accountsService.updateAccount(accountId, accountDto)
                 .map(ResponseEntity.status(HttpStatus.OK)::body);
     }

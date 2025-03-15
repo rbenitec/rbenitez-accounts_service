@@ -20,4 +20,7 @@ public class ResponseAccountDto {
     private Double amount;
     private String createAt;
     private String updateAt;
+    private Double commission;
+    private String monthlyMovements;
+    private Double minimumAverageDailyAmount;
 }

@@ -19,7 +19,10 @@ public class MapperToResponseAccount implements Function<Account, ResponseAccoun
                 account.getCci(),
                 account.getAmount(),
                 account.getDateCreated(),
-                account.getDateUpdate()
+                account.getDateUpdate(),
+                account.getCommission() != null ? account.getCommission() : null,
+                account.getMonthlyMovements() != null ? account.getMonthlyMovements() : null,
+                account.getMinimumAverageDailyAmount() != null ? account.getMinimumAverageDailyAmount() : null
         );
     }
 }
