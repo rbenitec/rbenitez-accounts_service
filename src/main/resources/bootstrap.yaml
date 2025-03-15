@@ -6,6 +6,10 @@ spring:
     config:
       enable: true
       uri: http://localhost:8090
+  config:
+    client:
+      customer:
+        url: http://localhost:8095/customer
   data:
     mongodb:
       uri: "mongodb+srv://m001-estudiante:rjbc2095@sandbox.ymd2iym.mongodb.net/rbenitez_banking?retryWrites=true&w=majority&appName=Sandbox"

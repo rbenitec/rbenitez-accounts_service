@@ -61,4 +61,13 @@ public class Utility {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         return hour.format(formatter);
     }
+
+    /**
+     * Genera un id de cuenta bancaria de 12 dígitos.
+     *
+     * @return id del credito generado como String.
+     */
+    public static String generatedIdAccount() {
+        return "PA" + java.util.UUID.randomUUID();
+    }
 }
